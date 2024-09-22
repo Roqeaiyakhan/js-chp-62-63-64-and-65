@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body>
+    <style>
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+
+    <h1>More ways to target elements</h1>
+    <ul id="myList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <button onclick="highlightFirst()">Highlight First</button>
+    <button onclick="highlightPrevious()">Highlight Previous</button>
+    <button onclick="highlightNext()">Highlight Next</button>
+    <button onclick="highlightLast()">Highlight Last</button>
+<script>
+    let currentIndex = 0;
+        const listItems = document.querySelectorAll('#myList li');
+
+        // Utility function to remove highlighting from all list items
+        function clearHighlight() {
+            listItems.forEach(item => item.classList.remove('highlight'));
+        }
+
+        // Highlight the first item using the firstElementChild property
+        function highlightFirst() {
+            clearHighlight();
+            document.querySelector('#myList').firstElementChild.classList.add('highlight');
+            currentIndex = 0;
+        }
+
+        // Highlight the last item using the lastElementChild property
+        function highlightLast() {
+            clearHighlight();
+            document.querySelector('#myList').lastElementChild.classList.add('highlight');
+            currentIndex = listItems.length - 1;
+        }
+
+        // Highlight the next item using direct index-based targeting
+        function highlightNext() {
+            clearHighlight();
+            currentIndex = (currentIndex + 1) % listItems.length; // Wrap around if at the end
+            listItems[currentIndex].classList.add('highlight');
+        }
+
+        // Highlight the previous item using nextElementSibling and previousElementSibling
+        function highlightPrevious() {
+            clearHighlight();
+            currentIndex = (currentIndex - 1 + listItems.length) % listItems.length; // Wrap around if at the start
+            listItems[currentIndex].classList.add('highlight');
+        }
+    
+</script>
+</body>
+</html>
